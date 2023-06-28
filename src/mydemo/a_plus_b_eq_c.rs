@@ -150,6 +150,20 @@ mod tests {
         let prover = MockProver::run(k, &circuit, public_inputs).unwrap();
         assert_eq!(prover.verify(), Ok(()))
     }
+    #[test]
+    pub fn test_wrong() {
+        let k = 5;
+        let a = Fr::from(1u64);
+        let b = Fr::from(2u64);
+        let out = a.clone() + b.clone() + Fr::from(4u64);
+        let circuit = APlusBEqCCircuit::<Fr> {
+            a: Some(a.clone()),
+            b: Some(b.clone()),
+        };
+        let public_inputs = vec![vec![out.clone()]];
+        let prover = MockProver::run(k, &circuit, public_inputs).unwrap();
+        assert_ne!(prover.verify(), Ok(()))
+    }
 
     #[cfg(feature = "dev-graph")]
     #[test]
