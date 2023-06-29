@@ -3,6 +3,7 @@ extern crate core;
 pub mod example1;
 mod mydemo;
 mod range_check;
+pub mod zk;
 
 use halo2_proofs::dev::MockProver;
 use halo2_proofs::pairing::bn256::Fr;
